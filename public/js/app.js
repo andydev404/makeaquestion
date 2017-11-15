@@ -18,6 +18,7 @@ var QuestionsApp = function (_React$Component) {
 
     _this.handleQuestions = _this.handleQuestions.bind(_this);
     _this.handleRemove = _this.handleRemove.bind(_this);
+    _this.handleRemoveQuestion = _this.handleRemoveQuestion.bind(_this);
     _this.title = "Questions App";
     _this.state = {
       questionsList: []
@@ -75,6 +76,18 @@ var QuestionsApp = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleRemoveQuestion',
+    value: function handleRemoveQuestion(questionId) {
+      console.log(questionId);
+      this.setState(function (prevState) {
+        return {
+          questionsList: prevState.questionsList.filter(function (item, index) {
+            return questionId !== index;
+          })
+        };
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -82,7 +95,7 @@ var QuestionsApp = function (_React$Component) {
         null,
         React.createElement(Header, { title: this.title }),
         React.createElement(FormHeader, { handleQuestions: this.handleQuestions }),
-        React.createElement(Questions, { handleRemove: this.handleRemove, questionsList: this.state.questionsList })
+        React.createElement(Questions, { handleRemove: this.handleRemove, handleRemoveQuestion: this.handleRemoveQuestion, questionsList: this.state.questionsList })
       );
     }
   }]);
@@ -243,6 +256,8 @@ var Questions = function (_React$Component4) {
   _createClass(Questions, [{
     key: 'render',
     value: function render() {
+      var _this5 = this;
+
       return React.createElement(
         'div',
         { className: 'container' },
@@ -279,6 +294,11 @@ var Questions = function (_React$Component4) {
                 'th',
                 { scope: 'col' },
                 'Question'
+              ),
+              React.createElement(
+                'th',
+                { scope: 'col' },
+                'Options'
               )
             )
           ),
@@ -286,7 +306,7 @@ var Questions = function (_React$Component4) {
             'tbody',
             null,
             this.props.questionsList.map(function (question, index) {
-              return React.createElement(Question, { key: index, number: index, questionsList: question });
+              return React.createElement(Question, { key: index, number: index, handleRemoveQuestion: _this5.props.handleRemoveQuestion, questionsList: question });
             })
           )
         )
@@ -300,13 +320,21 @@ var Questions = function (_React$Component4) {
 var Question = function (_React$Component5) {
   _inherits(Question, _React$Component5);
 
-  function Question() {
+  function Question(props) {
     _classCallCheck(this, Question);
 
-    return _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).apply(this, arguments));
+    var _this6 = _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
+
+    _this6.handleRemoveItem = _this6.handleRemoveItem.bind(_this6);
+    return _this6;
   }
 
   _createClass(Question, [{
+    key: 'handleRemoveItem',
+    value: function handleRemoveItem() {
+      this.props.handleRemoveQuestion(this.props.number);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -332,6 +360,15 @@ var Question = function (_React$Component5) {
           null,
           this.props.questionsList.question,
           '?'
+        ),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            'button',
+            { type: 'button', onClick: this.handleRemoveItem, className: 'btn btn-outline-danger' },
+            'Remove'
+          )
         )
       );
     }

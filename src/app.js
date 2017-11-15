@@ -3,6 +3,7 @@ class QuestionsApp extends React.Component {
     super(props);
     this.handleQuestions = this.handleQuestions.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleRemoveQuestion = this.handleRemoveQuestion.bind(this);
     this.title = "Questions App";
     this.state = {
       questionsList: []
@@ -35,12 +36,19 @@ class QuestionsApp extends React.Component {
     })
   }
 
+  handleRemoveQuestion(questionId) {
+    console.log(questionId)
+    this.setState((prevState) => ({
+      questionsList: prevState.questionsList.filter((item, index) => questionId !== index)
+    }))
+  }
+
   render() {
     return (
       <div>
         <Header title={this.title} />
         <FormHeader handleQuestions={this.handleQuestions} />
-        <Questions handleRemove={this.handleRemove} questionsList={this.state.questionsList} />
+        <Questions handleRemove={this.handleRemove} handleRemoveQuestion={this.handleRemoveQuestion} questionsList={this.state.questionsList} />
       </div>
     );
   }
@@ -126,12 +134,13 @@ class Questions extends React.Component {
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Question</th>
+              <th scope="col">Options</th>
             </tr>
           </thead>
           <tbody>
             {
               this.props.questionsList.map((question, index) => {
-                return <Question key={index} number={index} questionsList={question} />
+                return <Question key={index} number={index} handleRemoveQuestion={this.props.handleRemoveQuestion} questionsList={question} />
               })
             }
           </tbody>
@@ -142,6 +151,14 @@ class Questions extends React.Component {
 }
 
 class Question extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveItem = this.handleRemoveItem.bind(this);
+  }
+
+  handleRemoveItem() {
+    this.props.handleRemoveQuestion(this.props.number);
+  }
   render() {
     return (
       <tr>
@@ -149,6 +166,7 @@ class Question extends React.Component {
         <td>{this.props.questionsList.firstName}</td>
         <td>{this.props.questionsList.lastName}</td>
         <td>{this.props.questionsList.question}?</td>
+        <td><button type="button" onClick={this.handleRemoveItem} className="btn btn-outline-danger">Remove</button></td>
       </tr>
     );
   }
