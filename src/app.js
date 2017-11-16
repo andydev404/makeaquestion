@@ -10,6 +10,25 @@ class QuestionsApp extends React.Component {
     };
   }
 
+  componentDidMount() {
+    try {
+      let json = localStorage.getItem('options');
+      let questionsList = JSON.parse(json);
+
+      if (json) {
+        this.setState(() => ({questionsList}))
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.questionsList.length != this.state.questionsList.length) {
+      localStorage.setItem('options', JSON.stringify(this.state.questionsList));
+    }
+  }
+
   handleQuestions(question) {
     if (question.firstName === '' || question.lastName === '' || question.question === '') {
       return 'All values are required'
