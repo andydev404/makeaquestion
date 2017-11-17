@@ -2203,6 +2203,10 @@ var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Question = __webpack_require__(14);
+
+var _Question2 = _interopRequireDefault(_Question);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2221,59 +2225,59 @@ var Questions = function (_Component) {
   }
 
   _createClass(Questions, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        "div",
-        { className: "container" },
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
-          "button",
-          { type: "button", onClick: this.props.handleRemove, className: "btn btn-outline-danger mb-4" },
-          "Remove All"
+          'button',
+          { type: 'button', onClick: this.props.handleRemove, className: 'btn btn-outline-danger mb-4' },
+          'Remove All'
         ),
         _react2.default.createElement(
-          "table",
-          { className: "table" },
+          'table',
+          { className: 'table' },
           _react2.default.createElement(
-            "thead",
-            { className: "thead-dark" },
+            'thead',
+            { className: 'thead-dark' },
             _react2.default.createElement(
-              "tr",
+              'tr',
               null,
               _react2.default.createElement(
-                "th",
-                { scope: "col" },
-                "#"
+                'th',
+                { scope: 'col' },
+                '#'
               ),
               _react2.default.createElement(
-                "th",
-                { scope: "col" },
-                "First Name"
+                'th',
+                { scope: 'col' },
+                'First Name'
               ),
               _react2.default.createElement(
-                "th",
-                { scope: "col" },
-                "Last Name"
+                'th',
+                { scope: 'col' },
+                'Last Name'
               ),
               _react2.default.createElement(
-                "th",
-                { scope: "col" },
-                "Question"
+                'th',
+                { scope: 'col' },
+                'Question'
               ),
               _react2.default.createElement(
-                "th",
-                { scope: "col" },
-                "Options"
+                'th',
+                { scope: 'col' },
+                'Options'
               )
             )
           ),
           _react2.default.createElement(
-            "tbody",
+            'tbody',
             null,
             this.props.questionsList.map(function (question, index) {
-              return _react2.default.createElement(Question, { key: index, number: index, handleRemoveQuestion: _this2.props.handleRemoveQuestion, questionsList: question });
+              return _react2.default.createElement(_Question2.default, { key: index, number: index, handleRemoveQuestion: _this2.props.handleRemoveQuestion, questionsList: question });
             })
           )
         )
@@ -2455,10 +2459,6 @@ var _formHeader2 = _interopRequireDefault(_formHeader);
 var _Questions = __webpack_require__(13);
 
 var _Questions2 = _interopRequireDefault(_Questions);
-
-var _Question = __webpack_require__(14);
-
-var _Question2 = _interopRequireDefault(_Question);
 
 var _Header = __webpack_require__(15);
 

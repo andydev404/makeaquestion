@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Question from './Question';
 
 class Questions extends Component {
   render() {

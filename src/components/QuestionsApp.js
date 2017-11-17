@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormHeader from './formHeader';
 import Questions from './Questions';
-import Question from './Question';
 import Header from './Header';
 
 class QuestionsApp extends Component {
